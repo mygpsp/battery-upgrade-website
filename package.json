@@ -1,12 +1,17 @@
 {
   "name": "www.batterrycharger",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "description": "Bilingual battery upgrade website with Google Cloud integration",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "deploy": "./deploy.sh",
+    "test:firestore": "cd functions && node test-firestore.js",
+    "function:dev": "cd functions && npm start",
+    "function:install": "cd functions && npm install"
   },
   "dependencies": {
     "next": "16.1.1",
@@ -18,5 +23,20 @@
     "eslint": "^9",
     "eslint-config-next": "16.1.1",
     "tailwindcss": "^4"
-  }
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "keywords": [
+    "battery",
+    "upgrade",
+    "bosch",
+    "tesla",
+    "bilingual",
+    "nextjs",
+    "google-cloud",
+    "firestore"
+  ],
+  "author": "BatteryUpgrade",
+  "license": "UNLICENSED"
 }

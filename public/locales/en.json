@@ -1,0 +1,124 @@
+{
+  "nav": {
+    "home": "Home",
+    "features": "Features",
+    "order": "Order Now",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "Upgrade Your Bosch Battery",
+    "subtitle": "Transform your 4Ah Bosch battery into a powerful 10Ah Tesla-powered battery",
+    "cta": "Start Your Upgrade",
+    "learnMore": "Learn More"
+  },
+  "features": {
+    "title": "Why Upgrade?",
+    "subtitle": "Experience the power of Tesla technology in your Bosch tools",
+    "capacity": {
+      "title": "2.5x More Capacity",
+      "description": "Upgrade from 4Ah to 10Ah for extended runtime and productivity"
+    },
+    "quality": {
+      "title": "Tesla Quality Cells",
+      "description": "Premium Tesla battery cells for superior performance and longevity"
+    },
+    "warranty": {
+      "title": "1 Year Warranty",
+      "description": "Full warranty coverage for peace of mind"
+    },
+    "eco": {
+      "title": "Eco-Friendly",
+      "description": "Reuse your existing battery case - better for the environment"
+    }
+  },
+  "howItWorks": {
+    "title": "How It Works",
+    "subtitle": "Simple 3-step process to upgrade your battery",
+    "step1": {
+      "title": "Place Your Order",
+      "description": "Fill out our simple order form with your details"
+    },
+    "step2": {
+      "title": "Ship Your Battery",
+      "description": "Send us your old 4Ah Bosch battery for upgrade"
+    },
+    "step3": {
+      "title": "Receive Upgraded Battery",
+      "description": "Get your upgraded 10Ah Tesla-powered battery delivered back to you"
+    }
+  },
+  "pricing": {
+    "title": "Transparent Pricing",
+    "price": "$149",
+    "perBattery": "per battery",
+    "includes": "What's Included:",
+    "feature1": "Tesla 10Ah battery cells",
+    "feature2": "Professional installation",
+    "feature3": "Quality testing",
+    "feature4": "1-year warranty",
+    "feature5": "Return shipping included"
+  },
+  "order": {
+    "title": "Order Your Battery Upgrade",
+    "subtitle": "Fill out the form below and we'll get started on your upgrade",
+    "form": {
+      "name": "Full Name",
+      "namePlaceholder": "John Doe",
+      "email": "Email Address",
+      "emailPlaceholder": "john@example.com",
+      "phone": "Phone Number",
+      "phonePlaceholder": "+1 (555) 123-4567",
+      "address": "Return Shipping Address",
+      "addressPlaceholder": "123 Main St, City, State, ZIP",
+      "quantity": "Number of Batteries",
+      "quantityLabel": "How many batteries would you like to upgrade?",
+      "submit": "Submit Order",
+      "submitting": "Processing..."
+    },
+    "validation": {
+      "nameRequired": "Please enter your full name",
+      "emailRequired": "Please enter your email address",
+      "emailInvalid": "Please enter a valid email address",
+      "phoneRequired": "Please enter your phone number",
+      "addressRequired": "Please enter your return shipping address",
+      "quantityMin": "Quantity must be at least 1"
+    },
+    "error": "There was an error submitting your order. Please try again."
+  },
+  "orderSuccess": {
+    "title": "Order Confirmed!",
+    "thankYou": "Thank you for your order",
+    "orderId": "Your Order ID",
+    "nextSteps": "Next Steps",
+    "step1Title": "Package Your Battery",
+    "step1Description": "Carefully package your Bosch 4Ah battery in a sturdy box with adequate padding.",
+    "step2Title": "Include Order ID",
+    "step2Description": "Write your Order ID on a piece of paper and include it in the package.",
+    "step3Title": "Ship to Us",
+    "step3Description": "Ship your package to the address provided in your confirmation email.",
+    "step4Title": "Track Your Upgrade",
+    "step4Description": "We'll email you updates as we upgrade and ship back your battery.",
+    "shippingAddress": "Shipping Address",
+    "addressLine1": "Battery Upgrade Center",
+    "addressLine2": "123 Tech Boulevard",
+    "addressLine3": "Innovation District",
+    "addressLine4": "Tbilisi, Georgia 0160",
+    "backHome": "Back to Home"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Have questions? We're here to help!",
+    "email": "Email",
+    "phone": "Phone",
+    "address": "Address"
+  },
+  "footer": {
+    "tagline": "Powering your tools with Tesla technology",
+    "rights": "All rights reserved.",
+    "links": {
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service",
+      "contact": "Contact"
+    }
+  }
+}
