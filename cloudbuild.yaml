@@ -39,3 +39,8 @@ steps:
 # This section lists the container image we built so Cloud Build can clean it up later.
 images:
 - '${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_ARTIFACT_REGISTRY_REPO}/${_SERVICE_NAME}:${COMMIT_SHA}'
+
+# THIS IS THE NEW, CRITICAL PART
+# This option explicitly tells Cloud Build how to handle logs, solving the trigger error.
+options:
+  logging: CLOUD_LOGGING_ONLY
