@@ -1,18 +1,29 @@
 const functions = require('@google-cloud/functions-framework');
 const { Firestore } = require('@google-cloud/firestore');
 
-// Initialize Firestore
-const firestore = new Firestore();
+// Detect if we're running locally (no GCP credentials)
+const isLocal = !process.env.GOOGLE_APPLICATION_CREDENTIALS && !process.env.GCLOUD_PROJECT;
+
+// Initialize Firestore only if not local
+let firestore;
+if (!isLocal) {
+    try {
+        firestore = new Firestore();
+        console.log('✅ Firestore initialized');
+    } catch (error) {
+        console.warn('⚠️  Firestore initialization failed:', error.message);
+    }
+}
+
+// In-memory storage for local development
+const localOrders = [];
 
 // Register the function with the specific name 'order-processor'
-// This MUST match the _FUNCTION_NAME in your Cloud Build settings!
 functions.http('order-processor', async (req, res) => {
     // 1. Handle CORS (Cross-Origin Resource Sharing)
-    // This allows your website to talk to this backend function.
     res.set('Access-Control-Allow-Origin', '*');
 
     if (req.method === 'OPTIONS') {
-        // Send response to OPTIONS requests
         res.set('Access-Control-Allow-Methods', 'POST');
         res.set('Access-Control-Allow-Headers', 'Content-Type');
         res.set('Access-Control-Max-Age', '3600');
@@ -30,32 +41,72 @@ functions.http('order-processor', async (req, res) => {
         const orderData = req.body;
 
         // Simple validation
-        if (!orderData) {
-            return res.status(400).send({ error: 'No order data provided' });
+        if (!orderData || !orderData.name || !orderData.email) {
+            return res.status(400).send({
+                error: 'Missing required fields',
+                required: ['name', 'email', 'phone', 'address', 'quantity']
+            });
         }
 
-        console.log("Received order:", JSON.stringify(orderData));
+        console.log("📦 Received order:", JSON.stringify(orderData, null, 2));
 
-        // 4. Save the order to Firestore
-        const orderRef = firestore.collection('orders').doc();
+        // Generate order ID
+        const orderId = `ORD-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
+
+        // Create order object
         const orderWithTimestamp = {
             ...orderData,
-            orderId: orderRef.id,
+            orderId: orderId,
             createdAt: new Date().toISOString(),
-            status: 'Pending'
+            status: 'Pending - Awaiting Battery'
         };
 
-        await orderRef.set(orderWithTimestamp);
+        // 4. Save the order
+        if (isLocal) {
+            // Local development - save to memory
+            localOrders.push(orderWithTimestamp);
+            console.log('💾 Order saved locally (in-memory)');
+            console.log(`📊 Total orders in memory: ${localOrders.length}`);
+        } else {
+            // Production - save to Firestore
+            if (firestore) {
+                const orderRef = firestore.collection('orders').doc(orderId);
+                await orderRef.set(orderWithTimestamp);
+                console.log('💾 Order saved to Firestore');
+            } else {
+                console.warn('⚠️  Firestore not available, order not persisted');
+            }
+        }
 
         // 5. Send success response
+        console.log(`✅ Order processed successfully: ${orderId}`);
+
         res.status(200).send({
             success: true,
-            message: 'Order received',
-            orderId: orderRef.id
+            message: 'Order received successfully',
+            orderId: orderId,
+            environment: isLocal ? 'local' : 'production'
         });
 
     } catch (error) {
-        console.error("Error processing order:", error);
-        res.status(500).send({ error: 'Internal Server Error' });
+        console.error("❌ Error processing order:", error);
+        res.status(500).send({
+            error: 'Internal Server Error',
+            message: error.message
+        });
     }
 });
+
+// Helper endpoint to view local orders (development only)
+if (isLocal) {
+    functions.http('view-orders', async (req, res) => {
+        res.set('Access-Control-Allow-Origin', '*');
+        res.status(200).send({
+            total: localOrders.length,
+            orders: localOrders
+        });
+    });
+    console.log('🔧 Development mode: /view-orders endpoint available');
+}
+
+console.log(`🚀 Function starting in ${isLocal ? 'LOCAL' : 'PRODUCTION'} mode`);
